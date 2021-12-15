@@ -31,7 +31,7 @@ public class TiendaServiceTest {
 	}
 	
 	
-	@Test
+	//@Test
 	public void findAllTiendasDTOTest() {
 		
 		List<TiendaDTO> listaDto = tiendaService.findAllTiendasDTO();
