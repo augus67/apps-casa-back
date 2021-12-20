@@ -14,46 +14,64 @@ public class TGenListaProductoPK implements Serializable {
 	private static final long serialVersionUID = 4897198551864082606L;
 
 	@Column(insertable=false, updatable=false)
-	private int idLista;
+	private int idlista;
 
 	@Column(insertable=false, updatable=false)
-	private short idProducto;
+	private Long idproducto;
 
 	
 	public TGenListaProductoPK() {
 	}
-	public int getIdLista() {
-		return this.idLista;
-	}
-	public void setIdLista(int idLista) {
-		this.idLista = idLista;
-	}
-	public short getIdProducto() {
-		return this.idProducto;
-	}
-	public void setIdProducto(short idProducto) {
-		this.idProducto = idProducto;
+
+
+	public int getIdlista() {
+		return idlista;
 	}
 
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof TGenListaProductoPK)) {
-			return false;
-		}
-		TGenListaProductoPK castOther = (TGenListaProductoPK)other;
-		return 
-			(this.idLista == castOther.idLista)
-			&& (this.idProducto == castOther.idProducto);
+
+	public void setIdlista(int idlista) {
+		this.idlista = idlista;
 	}
 
+
+	public Long getIdproducto() {
+		return idproducto;
+	}
+
+
+	public void setIdproducto(Long idproducto) {
+		this.idproducto = idproducto;
+	}
+
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idLista;
-		hash = hash * prime + ((int) this.idProducto);
-		
-		return hash;
+		int result = 1;
+		result = prime * result + idlista;
+		result = prime * result + ((idproducto == null) ? 0 : idproducto.hashCode());
+		return result;
 	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TGenListaProductoPK other = (TGenListaProductoPK) obj;
+		if (idlista != other.idlista)
+			return false;
+		if (idproducto == null) {
+			if (other.idproducto != null)
+				return false;
+		} else if (!idproducto.equals(other.idproducto))
+			return false;
+		return true;
+	}
+	
+	
 }

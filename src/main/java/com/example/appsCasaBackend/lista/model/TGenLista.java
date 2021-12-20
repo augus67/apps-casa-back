@@ -19,21 +19,17 @@ public class TGenLista implements Serializable {
 	private static final long serialVersionUID = -4386830203492541323L;
 
 	@Id
-	private int idLista;
+	private int idlista;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_alta")
 	private Date fechaAlta;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_lista")
 	private Date fechaLista;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_ult_mod")
 	private Date fechaUltMod;
 
-	@Column(name="importe_total")
 	private BigDecimal importeTotal;
 
 	//bi-directional many-to-one association to TGenListaProducto
@@ -45,11 +41,11 @@ public class TGenLista implements Serializable {
 	}
 
 	public int getIdLista() {
-		return this.idLista;
+		return this.idlista;
 	}
 
-	public void setIdLista(int idLista) {
-		this.idLista = idLista;
+	public void setIdLista(int idlista) {
+		this.idlista = idlista;
 	}
 
 	public Date getFechaAlta() {

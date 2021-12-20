@@ -20,28 +20,24 @@ public class TGenListaProducto implements Serializable {
 	@EmbeddedId
 	private TGenListaProductoPK id;
 
-	@Column(name="cantidad")
 	private int cantidad;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_alta")
 	private Date fechaAlta;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_ult_mod")
 	private Date fechaUltMod;
 
-	@Column(name="importe_prod")
 	private BigDecimal importeProd;
 
 	//bi-directional many-to-one association to TGenLista
 	@ManyToOne
-	@JoinColumn(name="idLista", insertable=false, updatable=false)
+	@JoinColumn(name="idlista", insertable=false, updatable=false)
 	private TGenLista TGenLista;
 
 	//bi-directional many-to-one association to TGenProducto
 	@ManyToOne
-	@JoinColumn(name="idProducto", insertable=false, updatable=false)
+	@JoinColumn(name="idproducto", insertable=false, updatable=false)
 	private TGenProducto TGenProducto;
 
 	

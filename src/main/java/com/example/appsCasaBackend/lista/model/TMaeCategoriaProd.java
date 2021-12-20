@@ -6,32 +6,26 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
- * The persistent class for the T_MAE_CATEGORIA_PROD database table.
- * 
- */
 @Entity
 @Table(name="T_MAE_CATEGORIA_PROD")
-@NamedQuery(name="TMaeCategoriaProd.findAll", query="SELECT t FROM TMaeCategoriaProd t")
+//@NamedQuery(name="TMaeCategoriaProd.findAll", query="SELECT t FROM TMaeCategoriaProd t")
 public class TMaeCategoriaProd implements Serializable {
 
 	private static final long serialVersionUID = 5288272371298158664L;
 
 	@Id
-	private short idCategoria;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "catprod_generator")
+	@SequenceGenerator(name = "catprod_generator", sequenceName = "SEQ_ID_CATPROD", allocationSize = 1)
+	private Long idcategoria;
 
-	@Column(name="cod_categoria")
 	private String codCategoria;
 
-	@Column(name="des_categoria")
 	private String desCategoria;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_alta")
 	private Date fechaAlta;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_ult_mod")
 	private Date fechaUltMod;
 
 	//bi-directional many-to-one association to TGenProducto
@@ -41,12 +35,12 @@ public class TMaeCategoriaProd implements Serializable {
 	public TMaeCategoriaProd() {
 	}
 
-	public short getIdCategoria() {
-		return this.idCategoria;
+	public Long getIdCategoria() {
+		return this.idcategoria;
 	}
 
-	public void setIdCategoria(short idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setIdCategoria(Long idcategoria) {
+		this.idcategoria = idcategoria;
 	}
 
 	public String getCodCategoria() {

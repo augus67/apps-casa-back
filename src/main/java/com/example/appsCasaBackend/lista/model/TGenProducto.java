@@ -13,45 +13,40 @@ import java.util.List;
  */
 @Entity
 @Table(name="T_GEN_PRODUCTO")
-@NamedQuery(name="TGenProducto.findAll", query="SELECT t FROM TGenProducto t")
+//@NamedQuery(name="TGenProducto.findAll", query="SELECT t FROM TGenProducto t")
 public class TGenProducto implements Serializable {
 
 	private static final long serialVersionUID = -4269876874068448427L;
 
 	@Id
-	private short idProducto;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "producto_generator")
+	@SequenceGenerator(name = "producto_generator", sequenceName = "SEQ_ID_PRODUCTO", allocationSize = 1)
+	private Long idproducto;
 
-	@Column(name="capacidad")
 	private String capacidad;
 
-	@Column(name="des_producto")
 	private String desProducto;
 
-	@Column(name="embalaje")
 	private String embalaje;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_alta")
 	private Date fechaAlta;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_ult_mod")
 	private Date fechaUltMod;
 
-	@Column(name="peso")
 	private String peso;
 
-	@Column(name="precio")
 	private BigDecimal precio;
 
 	//bi-directional many-to-one association to TGenTienda
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="idTienda")
+	@JoinColumn(name="idtienda")
 	private TGenTienda TGenTienda;
 
 	//bi-directional many-to-one association to TMaeCategoriaProd
 	@ManyToOne
-	@JoinColumn(name="idCategoria")
+	@JoinColumn(name="idcategoria")
 	private TMaeCategoriaProd TMaeCategoriaProd;
 
 	//bi-directional many-to-one association to TGenListaProducto
@@ -62,12 +57,12 @@ public class TGenProducto implements Serializable {
 	public TGenProducto() {
 	}
 
-	public short getIdProducto() {
-		return this.idProducto;
+	public Long getIdProducto() {
+		return this.idproducto;
 	}
 
-	public void setIdProducto(short idProducto) {
-		this.idProducto = idProducto;
+	public void setIdProducto(Long idproducto) {
+		this.idproducto = idproducto;
 	}
 
 	public String getCapacidad() {

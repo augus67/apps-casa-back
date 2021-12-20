@@ -17,7 +17,7 @@ public class TiendaServiceTest {
 	@Autowired
 	private TiendaService tiendaService;
 	
-	//@Test
+	@Test
 	public void updateTiendaTest() {
 		
 		TGenTienda tienda = tiendaService.findById(1L);
@@ -31,7 +31,7 @@ public class TiendaServiceTest {
 	}
 	
 	
-	//@Test
+	@Test
 	public void findAllTiendasDTOTest() {
 		
 		List<TiendaDTO> listaDto = tiendaService.findAllTiendasDTO();

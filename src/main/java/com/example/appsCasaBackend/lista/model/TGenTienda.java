@@ -32,23 +32,19 @@ public class TGenTienda implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tienda_generator")
 	@SequenceGenerator(name = "tienda_generator", sequenceName = "seq_id_tienda", allocationSize = 1)
+	@Column(name="idtienda")
 	private Long idTienda;
 
-	@Column(name="des_tienda")
 	private String desTienda;
 
-	@Column(name="direccion")
 	private String direccion;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_alta")
 	private Date fechaAlta;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_ult_mod")
 	private Date fechaUltMod;
 
-	@Column(name="telefono")
 	private String telefono;
 
 	//bi-directional many-to-one association to TGenProducto
