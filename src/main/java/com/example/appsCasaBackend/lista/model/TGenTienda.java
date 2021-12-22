@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +18,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-/**
- * The persistent class for the T_GEN_TIENDA database table.
- * 
- */
 @Entity
 @Table(name="T_GEN_TIENDA")
 public class TGenTienda implements Serializable {
@@ -48,7 +43,7 @@ public class TGenTienda implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-one association to TGenProducto
-	@OneToMany(mappedBy="TGenTienda", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy="TGenTienda")
 	private List<TGenProducto> TGenProductos = new ArrayList<TGenProducto>();
 
 	
@@ -140,6 +135,61 @@ public class TGenTienda implements Serializable {
 	public String toString() {
 		return "TGenTienda [idTienda=" + idTienda + ", desTienda=" + desTienda + ", direccion=" + direccion
 				+ ", fechaAlta=" + fechaAlta + ", fechaUltMod=" + fechaUltMod + ", telefono=" + telefono + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((desTienda == null) ? 0 : desTienda.hashCode());
+		result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
+		result = prime * result + ((fechaAlta == null) ? 0 : fechaAlta.hashCode());
+		result = prime * result + ((fechaUltMod == null) ? 0 : fechaUltMod.hashCode());
+		result = prime * result + ((idTienda == null) ? 0 : idTienda.hashCode());
+		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TGenTienda other = (TGenTienda) obj;
+		if (desTienda == null) {
+			if (other.desTienda != null)
+				return false;
+		} else if (!desTienda.equals(other.desTienda))
+			return false;
+		if (direccion == null) {
+			if (other.direccion != null)
+				return false;
+		} else if (!direccion.equals(other.direccion))
+			return false;
+		if (fechaAlta == null) {
+			if (other.fechaAlta != null)
+				return false;
+		} else if (!fechaAlta.equals(other.fechaAlta))
+			return false;
+		if (fechaUltMod == null) {
+			if (other.fechaUltMod != null)
+				return false;
+		} else if (!fechaUltMod.equals(other.fechaUltMod))
+			return false;
+		if (idTienda == null) {
+			if (other.idTienda != null)
+				return false;
+		} else if (!idTienda.equals(other.idTienda))
+			return false;
+		if (telefono == null) {
+			if (other.telefono != null)
+				return false;
+		} else if (!telefono.equals(other.telefono))
+			return false;
+		return true;
 	}
 
 }

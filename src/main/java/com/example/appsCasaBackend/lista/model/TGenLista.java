@@ -102,4 +102,56 @@ public class TGenLista implements Serializable {
 		return TGenListaProducto;
 	}
 
+	@Override
+	public String toString() {
+		return "TGenLista [idlista=" + idlista + ", fechaAlta=" + fechaAlta + ", fechaLista=" + fechaLista
+				+ ", fechaUltMod=" + fechaUltMod + ", importeTotal=" + importeTotal + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fechaAlta == null) ? 0 : fechaAlta.hashCode());
+		result = prime * result + ((fechaLista == null) ? 0 : fechaLista.hashCode());
+		result = prime * result + ((fechaUltMod == null) ? 0 : fechaUltMod.hashCode());
+		result = prime * result + idlista;
+		result = prime * result + ((importeTotal == null) ? 0 : importeTotal.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TGenLista other = (TGenLista) obj;
+		if (fechaAlta == null) {
+			if (other.fechaAlta != null)
+				return false;
+		} else if (!fechaAlta.equals(other.fechaAlta))
+			return false;
+		if (fechaLista == null) {
+			if (other.fechaLista != null)
+				return false;
+		} else if (!fechaLista.equals(other.fechaLista))
+			return false;
+		if (fechaUltMod == null) {
+			if (other.fechaUltMod != null)
+				return false;
+		} else if (!fechaUltMod.equals(other.fechaUltMod))
+			return false;
+		if (idlista != other.idlista)
+			return false;
+		if (importeTotal == null) {
+			if (other.importeTotal != null)
+				return false;
+		} else if (!importeTotal.equals(other.importeTotal))
+			return false;
+		return true;
+	}
+
 }

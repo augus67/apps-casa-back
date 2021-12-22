@@ -1,19 +1,27 @@
 package com.example.appsCasaBackend.lista.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- * The persistent class for the T_GEN_PRODUCTO database table.
- * 
- */
+import org.hibernate.annotations.NamedQuery;
+
+
 @Entity
 @Table(name="T_GEN_PRODUCTO")
-//@NamedQuery(name="TGenProducto.findAll", query="SELECT t FROM TGenProducto t")
+@NamedQuery(name="TGenProducto.findAll", query="SELECT t FROM TGenProducto t")
 public class TGenProducto implements Serializable {
 
 	private static final long serialVersionUID = -4269876874068448427L;
@@ -40,12 +48,10 @@ public class TGenProducto implements Serializable {
 	private BigDecimal precio;
 
 	//bi-directional many-to-one association to TGenTienda
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="idtienda")
 	private TGenTienda TGenTienda;
 
 	//bi-directional many-to-one association to TMaeCategoriaProd
-	@ManyToOne
 	@JoinColumn(name="idcategoria")
 	private TMaeCategoriaProd TMaeCategoriaProd;
 
@@ -157,6 +163,80 @@ public class TGenProducto implements Serializable {
 		TGenListaProducto.setTGenProducto(null);
 
 		return TGenListaProducto;
+	}
+
+	@Override
+	public String toString() {
+		return "TGenProducto [idproducto=" + idproducto + ", capacidad=" + capacidad + ", desProducto=" + desProducto
+				+ ", embalaje=" + embalaje + ", fechaAlta=" + fechaAlta + ", fechaUltMod=" + fechaUltMod + ", peso="
+				+ peso + ", precio=" + precio + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((capacidad == null) ? 0 : capacidad.hashCode());
+		result = prime * result + ((desProducto == null) ? 0 : desProducto.hashCode());
+		result = prime * result + ((embalaje == null) ? 0 : embalaje.hashCode());
+		result = prime * result + ((fechaAlta == null) ? 0 : fechaAlta.hashCode());
+		result = prime * result + ((fechaUltMod == null) ? 0 : fechaUltMod.hashCode());
+		result = prime * result + ((idproducto == null) ? 0 : idproducto.hashCode());
+		result = prime * result + ((peso == null) ? 0 : peso.hashCode());
+		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TGenProducto other = (TGenProducto) obj;
+		if (capacidad == null) {
+			if (other.capacidad != null)
+				return false;
+		} else if (!capacidad.equals(other.capacidad))
+			return false;
+		if (desProducto == null) {
+			if (other.desProducto != null)
+				return false;
+		} else if (!desProducto.equals(other.desProducto))
+			return false;
+		if (embalaje == null) {
+			if (other.embalaje != null)
+				return false;
+		} else if (!embalaje.equals(other.embalaje))
+			return false;
+		if (fechaAlta == null) {
+			if (other.fechaAlta != null)
+				return false;
+		} else if (!fechaAlta.equals(other.fechaAlta))
+			return false;
+		if (fechaUltMod == null) {
+			if (other.fechaUltMod != null)
+				return false;
+		} else if (!fechaUltMod.equals(other.fechaUltMod))
+			return false;
+		if (idproducto == null) {
+			if (other.idproducto != null)
+				return false;
+		} else if (!idproducto.equals(other.idproducto))
+			return false;
+		if (peso == null) {
+			if (other.peso != null)
+				return false;
+		} else if (!peso.equals(other.peso))
+			return false;
+		if (precio == null) {
+			if (other.precio != null)
+				return false;
+		} else if (!precio.equals(other.precio))
+			return false;
+		return true;
 	}
 
 }

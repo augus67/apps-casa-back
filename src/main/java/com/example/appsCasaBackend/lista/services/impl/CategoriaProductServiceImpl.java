@@ -1,17 +1,21 @@
 package com.example.appsCasaBackend.lista.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.appsCasaBackend.lista.model.TMaeCategoriaProd;
 import com.example.appsCasaBackend.lista.repositories.CategoriaProductRepository;
 import com.example.appsCasaBackend.lista.services.CategoriaProductService;
+import com.example.appsCasaBackend.lista.utils.Utils;
 
 @Service
 @Transactional
@@ -23,8 +27,9 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 	private CategoriaProductRepository categoriaProdRepo;
 
 	
+	
 	@Override
-	public TMaeCategoriaProd saveCategoriaProd(TMaeCategoriaProd categoriaProd) {
+	public TMaeCategoriaProd save(TMaeCategoriaProd categoriaProd) {
 		
 		if(categoriaProd != null) {
 			logger.info("Se ha guardado la categoría: " + categoriaProd.getDesCategoria());
@@ -37,8 +42,9 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 	}
 
 	
+	
 	@Override
-	public boolean deleteCategoriaProdById(Long idCategoriaProd) {
+	public boolean deleteById(Long idCategoriaProd) {
 		
 		if(idCategoriaProd != null && categoriaProdRepo.existsById(idCategoriaProd)) {
 			categoriaProdRepo.deleteById(idCategoriaProd);
@@ -52,6 +58,7 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 	}
 	
 
+	
 	@Override
 	public TMaeCategoriaProd findById(Long idCategoriaProd) {
 
@@ -71,9 +78,60 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 		}
 		
 	}
+	
+	
+	
+	@Override
+	public List<TMaeCategoriaProd> findAllOrderByCodCategoria() {
+		
+		List<TMaeCategoriaProd> listCategoriasProd = null;		
+		
+		// El orden ascendente es el natural de String
+		listCategoriasProd = categoriaProdRepo.findAll(Sort.by("codCategoria"));
+		
+		return listCategoriasProd;
+	}
+
+
+
+	@Override
+	public List<TMaeCategoriaProd> findByCodCategoria(String codCategoria) {
+		
+		List<TMaeCategoriaProd> listCategoriasProd = null;
+		
+		if(codCategoria != null && !StringUtils.isBlank(codCategoria)) {
+			
+			listCategoriasProd = categoriaProdRepo.findByCodCategoria(codCategoria);
+			
+			if(!Utils.isEmpty(listCategoriasProd)) {
+				return listCategoriasProd;
+			}			 
+		}
+		
+		return null;
+	}
 
 	
 	
+	@Override
+	public List<TMaeCategoriaProd> findByCodCategoriaLikeIgnoreCase(String codCategoria) {
+		
+		List<TMaeCategoriaProd> listCategoriasProd = null;
+		
+		if(codCategoria != null && !StringUtils.isBlank(codCategoria)) {
+			
+			listCategoriasProd = categoriaProdRepo.findByCodCategoriaLikeIgnoreCase(codCategoria);
+			
+			if(!Utils.isEmpty(listCategoriasProd)) {
+				return listCategoriasProd;
+			}			 
+		}		
+		
+		return null;
+	}
+
+
+
 	public CategoriaProductRepository getCategoriaProdRepo() {
 		return categoriaProdRepo;
 	}

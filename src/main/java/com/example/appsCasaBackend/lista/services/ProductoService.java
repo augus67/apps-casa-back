@@ -4,7 +4,7 @@ import com.example.appsCasaBackend.lista.model.TGenProducto;
 
 public interface ProductoService {
 	
-	public TGenProducto saveProducto(TGenProducto producto);
+	public TGenProducto save(TGenProducto producto);
 	
 	public boolean deleteProductoById(Long idProducto);
 	

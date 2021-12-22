@@ -45,7 +45,7 @@ public class ProductoServiceTest {
 		producto1.setTGenTienda(tienda);
 		producto1.setTMaeCategoriaProd(catProd);
 
-		prodService.saveProducto(producto1);
+		prodService.save(producto1);
 		
 	}
 	

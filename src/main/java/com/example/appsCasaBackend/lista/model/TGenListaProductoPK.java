@@ -45,6 +45,12 @@ public class TGenListaProductoPK implements Serializable {
 
 
 	@Override
+	public String toString() {
+		return "TGenListaProductoPK [idlista=" + idlista + ", idproducto=" + idproducto + "]";
+	}
+
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

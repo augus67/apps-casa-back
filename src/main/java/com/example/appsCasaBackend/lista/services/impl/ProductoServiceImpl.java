@@ -24,7 +24,7 @@ public class ProductoServiceImpl implements ProductoService {
 	
 	
 	
-	public TGenProducto saveProducto(TGenProducto producto) {
+	public TGenProducto save(TGenProducto producto) {
 		
 		if(producto != null) {
 			return productoRepository.save(producto);

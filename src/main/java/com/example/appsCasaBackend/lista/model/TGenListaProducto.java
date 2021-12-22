@@ -99,4 +99,56 @@ public class TGenListaProducto implements Serializable {
 		this.TGenProducto = TGenProducto;
 	}
 
+	@Override
+	public String toString() {
+		return "TGenListaProducto [id=" + id + ", cantidad=" + cantidad + ", fechaAlta=" + fechaAlta + ", fechaUltMod="
+				+ fechaUltMod + ", importeProd=" + importeProd + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + cantidad;
+		result = prime * result + ((fechaAlta == null) ? 0 : fechaAlta.hashCode());
+		result = prime * result + ((fechaUltMod == null) ? 0 : fechaUltMod.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((importeProd == null) ? 0 : importeProd.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TGenListaProducto other = (TGenListaProducto) obj;
+		if (cantidad != other.cantidad)
+			return false;
+		if (fechaAlta == null) {
+			if (other.fechaAlta != null)
+				return false;
+		} else if (!fechaAlta.equals(other.fechaAlta))
+			return false;
+		if (fechaUltMod == null) {
+			if (other.fechaUltMod != null)
+				return false;
+		} else if (!fechaUltMod.equals(other.fechaUltMod))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (importeProd == null) {
+			if (other.importeProd != null)
+				return false;
+		} else if (!importeProd.equals(other.importeProd))
+			return false;
+		return true;
+	}
+
 }
