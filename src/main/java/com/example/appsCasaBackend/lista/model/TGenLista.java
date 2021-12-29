@@ -2,7 +2,11 @@ package com.example.appsCasaBackend.lista.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +38,7 @@ public class TGenLista implements Serializable {
 
 	//bi-directional many-to-one association to TGenListaProducto
 	@OneToMany(mappedBy="TGenLista")
-	private List<TGenListaProducto> TGenListaProductos;
+	private List<TGenListaProducto> TGenListaProductos = new ArrayList<TGenListaProducto>();
 
 	
 	public TGenLista() {
@@ -80,6 +84,7 @@ public class TGenLista implements Serializable {
 		this.importeTotal = importeTotal;
 	}
 
+	@JsonIgnore
 	public List<TGenListaProducto> getTGenListaProductos() {
 		return this.TGenListaProductos;
 	}

@@ -48,7 +48,8 @@ public class ListaBDConfiguration extends HikariConfig{
 		return builder.dataSource(listaDataSource())
 				.packages("com.example.appsCasaBackend.lista.model")
 				.persistenceUnit("listaPersistenceUnit")
-				.properties(jpaProperties()).build();
+				.properties(jpaProperties())
+				.build();
 	}
 
 	@Bean(name = "listaTransactionManager")

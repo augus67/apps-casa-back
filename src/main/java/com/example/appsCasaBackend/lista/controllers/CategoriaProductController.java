@@ -32,6 +32,7 @@ public class CategoriaProductController {
 	
 	
 	
+	@GetMapping("/{codCategoria}")
 	
 	
 	

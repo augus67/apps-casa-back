@@ -2,6 +2,7 @@ package com.example.appsCasaBackend.lista.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,18 +11,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.NamedQuery;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
 @Table(name="T_GEN_PRODUCTO")
-@NamedQuery(name="TGenProducto.findAll", query="SELECT t FROM TGenProducto t")
+//@NamedQuery(name="TGenProducto.findAll", query="SELECT t FROM TGenProducto t")
 public class TGenProducto implements Serializable {
 
 	private static final long serialVersionUID = -4269876874068448427L;
@@ -48,16 +50,18 @@ public class TGenProducto implements Serializable {
 	private BigDecimal precio;
 
 	//bi-directional many-to-one association to TGenTienda
+	@ManyToOne
 	@JoinColumn(name="idtienda")
 	private TGenTienda TGenTienda;
 
 	//bi-directional many-to-one association to TMaeCategoriaProd
+	@ManyToOne
 	@JoinColumn(name="idcategoria")
 	private TMaeCategoriaProd TMaeCategoriaProd;
 
 	//bi-directional many-to-one association to TGenListaProducto
 	@OneToMany(mappedBy="TGenProducto")
-	private List<TGenListaProducto> TGenListaProductos;
+	private List<TGenListaProducto> TGenListaProductos = new ArrayList<TGenListaProducto>();
 
 	
 	public TGenProducto() {
@@ -143,6 +147,7 @@ public class TGenProducto implements Serializable {
 		this.TMaeCategoriaProd = TMaeCategoriaProd;
 	}
 
+	@JsonIgnore
 	public List<TGenListaProducto> getTGenListaProductos() {
 		return this.TGenListaProductos;
 	}

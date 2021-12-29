@@ -1,6 +1,7 @@
 package com.example.appsCasaBackend.lista.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.NamedQuery;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -39,9 +42,9 @@ public class TMaeCategoriaProd implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaUltMod;
 
-	//bi-directional many-to-one association to TGenProducto
+	//bi-directional many-to-one association to TGenProducto	
 	@OneToMany(mappedBy="TMaeCategoriaProd")
-	private List<TGenProducto> TGenProductos;
+	private List<TGenProducto> TGenProductos = new ArrayList<TGenProducto>();
 
 	public TMaeCategoriaProd() {
 	}
@@ -86,6 +89,7 @@ public class TMaeCategoriaProd implements Serializable {
 		this.fechaUltMod = fechaUltMod;
 	}
 
+	@JsonIgnore
 	public List<TGenProducto> getTGenProductos() {
 		return this.TGenProductos;
 	}

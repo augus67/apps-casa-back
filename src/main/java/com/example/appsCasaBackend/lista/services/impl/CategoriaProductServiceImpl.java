@@ -84,10 +84,13 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 	@Override
 	public List<TMaeCategoriaProd> findAllOrderByCodCategoria() {
 		
-		List<TMaeCategoriaProd> listCategoriasProd = null;		
+		List<TMaeCategoriaProd> listCategoriasProd = null;
 		
 		// El orden ascendente es el natural de String
-		listCategoriasProd = categoriaProdRepo.findAll(Sort.by("codCategoria"));
+		//listCategoriasProd = categoriaProdRepo.findAll(Sort.by("codCategoria"));
+		logger.debug("Recuperando categorias de producto");
+		listCategoriasProd = categoriaProdRepo.findAllOrderByCodCategoria();
+		logger.debug("Se han obtenido un total de " + listCategoriasProd.size() + " categorias");
 		
 		return listCategoriasProd;
 	}

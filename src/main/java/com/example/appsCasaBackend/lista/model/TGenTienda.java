@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="T_GEN_TIENDA")
@@ -42,7 +44,7 @@ public class TGenTienda implements Serializable {
 
 	private String telefono;
 
-	//bi-directional many-to-one association to TGenProducto
+	//bi-directional many-to-one association to TGenProducto	
 	@OneToMany(mappedBy="TGenTienda")
 	private List<TGenProducto> TGenProductos = new ArrayList<TGenProducto>();
 
@@ -98,7 +100,8 @@ public class TGenTienda implements Serializable {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
+	
+	@JsonIgnore
 	public List<TGenProducto> getTGenProductos() {
 		return this.TGenProductos;
 	}
