@@ -10,6 +10,8 @@ public interface CategoriaProductService {
 	
 	public boolean deleteById(Long idCategoriaProd);
 	
+	public boolean updateCategoria(Long idCategoriaProd, TMaeCategoriaProd categoriaProd);
+	
 	public TMaeCategoriaProd findById(Long idCategoriaProd);
 	
 	public List<TMaeCategoriaProd> findAllOrderByCodCategoria();

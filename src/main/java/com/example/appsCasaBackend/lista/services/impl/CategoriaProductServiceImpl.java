@@ -1,5 +1,6 @@
 package com.example.appsCasaBackend.lista.services.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.appsCasaBackend.lista.model.TMaeCategoriaProd;
@@ -59,6 +59,35 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 	
 
 	
+	@Override
+	public boolean updateCategoria(Long idCategoriaProd, TMaeCategoriaProd categoriaProd) {
+		boolean isUpdated = false;
+		Optional<TMaeCategoriaProd> optCategoria = categoriaProdRepo.findById(idCategoriaProd);
+		
+		if(optCategoria.isPresent()) {
+			TMaeCategoriaProd updtCategoria = optCategoria.get();			
+			
+			if(categoriaProd.getCodCategoria() != null && !categoriaProd.getCodCategoria().equalsIgnoreCase(updtCategoria.getCodCategoria())) {
+				updtCategoria.setCodCategoria(categoriaProd.getCodCategoria().toUpperCase());				
+				isUpdated = true;
+			}
+			
+			if(categoriaProd.getDesCategoria() != null && !categoriaProd.getDesCategoria().equalsIgnoreCase(updtCategoria.getDesCategoria())) {
+				updtCategoria.setDesCategoria(categoriaProd.getDesCategoria().toUpperCase());
+				isUpdated = true;
+			}
+			
+			if(isUpdated) {
+				updtCategoria.setFechaUltMod(new Date());
+				categoriaProdRepo.save(categoriaProd);
+			}
+		}	
+		
+		return isUpdated;
+	}
+
+
+
 	@Override
 	public TMaeCategoriaProd findById(Long idCategoriaProd) {
 
