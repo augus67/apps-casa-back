@@ -17,7 +17,7 @@ public interface TiendaRepository extends JpaRepository<TGenTienda, Long>{
 	@Query("select t from TGenTienda t left join fetch t.TGenProductos p where t.idTienda = :idTienda")
 	TGenTienda findOneTiendaById(@Param("idTienda") Long idTienda);
 	
-	@Query("select tienda from TGenTienda tienda left join fetch tienda.TGenProductos order by tienda.idTienda")
+	@Query("select tienda from TGenTienda tienda order by tienda.idTienda")
 	List<TGenTienda> findAllTiendas();
 	
 	@Query("select new com.example.appsCasaBackend.lista.dto.TiendaDTO(t.desTienda, t.direccion, t.telefono) from TGenTienda t")
