@@ -32,6 +32,9 @@ public class TGenProducto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "producto_generator")
 	@SequenceGenerator(name = "producto_generator", sequenceName = "SEQ_ID_PRODUCTO", allocationSize = 1)
 	private Long idproducto;
+	
+	
+	//private Long idtienda;
 
 	private String capacidad;
 
@@ -67,13 +70,21 @@ public class TGenProducto implements Serializable {
 	public TGenProducto() {
 	}
 
-	public Long getIdProducto() {
-		return this.idproducto;
+	public Long getIdproducto() {
+		return idproducto;
 	}
 
-	public void setIdProducto(Long idproducto) {
+	public void setIdproducto(Long idproducto) {
 		this.idproducto = idproducto;
 	}
+
+//	public Long getIdtienda() {
+//		return idtienda;
+//	}
+//
+//	public void setIdtienda(Long idtienda) {
+//		this.idtienda = idtienda;
+//	}
 
 	public String getCapacidad() {
 		return this.capacidad;

@@ -4,13 +4,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.appsCasaBackend.lista.model.TMaeCategoriaProd;
 import com.example.appsCasaBackend.lista.repositories.CategoriaProductRepository;
@@ -18,7 +18,6 @@ import com.example.appsCasaBackend.lista.services.CategoriaProductService;
 import com.example.appsCasaBackend.lista.utils.Utils;
 
 @Service
-@Transactional
 public class CategoriaProductServiceImpl implements CategoriaProductService {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -29,6 +28,7 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 	
 	
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public TMaeCategoriaProd save(TMaeCategoriaProd categoriaProd) {
 		
 		if(categoriaProd != null) {
@@ -44,6 +44,7 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 	
 	
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public boolean deleteById(Long idCategoriaProd) {
 		
 		if(idCategoriaProd != null && categoriaProdRepo.existsById(idCategoriaProd)) {
@@ -60,6 +61,7 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 
 	
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public boolean updateCategoria(Long idCategoriaProd, TMaeCategoriaProd categoriaProd) {
 		boolean isUpdated = false;
 		Optional<TMaeCategoriaProd> optCategoria = categoriaProdRepo.findById(idCategoriaProd);
@@ -89,6 +91,7 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 
 
 	@Override
+	@Transactional(readOnly = true)
 	public TMaeCategoriaProd findById(Long idCategoriaProd) {
 
 		try {
@@ -111,6 +114,7 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 	
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<TMaeCategoriaProd> findAllOrderByCodCategoria() {
 		
 		List<TMaeCategoriaProd> listCategoriasProd = null;
@@ -127,6 +131,7 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<TMaeCategoriaProd> findByCodCategoria(String codCategoria) {
 		
 		List<TMaeCategoriaProd> listCategoriasProd = null;
@@ -146,6 +151,7 @@ public class CategoriaProductServiceImpl implements CategoriaProductService {
 	
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<TMaeCategoriaProd> findByCodCategoriaLikeIgnoreCase(String codCategoria) {
 		
 		List<TMaeCategoriaProd> listCategoriasProd = null;

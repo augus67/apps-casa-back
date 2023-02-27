@@ -1,7 +1,6 @@
 package com.example.appsCasaBackend.lista.controllers;
 
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.appsCasaBackend.lista.exceptions.ResourceNotFoundException;
 import com.example.appsCasaBackend.lista.model.TGenTienda;
+import com.example.appsCasaBackend.lista.services.ProductoService;
 import com.example.appsCasaBackend.lista.services.TiendaService;
 
 @RestController
@@ -29,6 +29,8 @@ public class TiendaController {
 	@Autowired
 	private TiendaService tiendaService;
 	
+	@Autowired
+	private ProductoService productoService;
 	
 	
 	@GetMapping
@@ -86,18 +88,47 @@ public class TiendaController {
 	
 	
 	@DeleteMapping("/{idTienda}")
-	public ResponseEntity<Long> deleteTienda(@PathVariable Long idTienda) {
+	public ResponseEntity<String> deleteTienda(@PathVariable Long idTienda) {
 		
 		boolean isDeleted = false;
+		long totalProductos = 0;
 		
-		isDeleted = tiendaService.deleteTienda(idTienda);
+		// Comprobamos que no existen productos con la tienda que se desea borrar
+		totalProductos = productoService.countProductsByIdTienda(idTienda);
 		
-		if(isDeleted) {
-			return new ResponseEntity<Long>(idTienda, HttpStatus.OK);
+		if(totalProductos == 0) {
+			isDeleted = tiendaService.deleteTienda(idTienda);
+			
+			if(isDeleted) {
+				return new ResponseEntity<String>(idTienda.toString(), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>(idTienda.toString(), HttpStatus.NOT_FOUND);
+			}	
 		} else {
-			return new ResponseEntity<Long>(idTienda, HttpStatus.NOT_FOUND);
-		}		
+			return new ResponseEntity<String>("Hay productos asociados a la tienda con ID: " + idTienda.toString() + ", se deben borrar primero todos esos productos y luego la tienda.", 
+					HttpStatus.NOT_FOUND);
+		}	
+			
 	}
+
+
+
+	public ProductoService getProductoService() {
+		return productoService;
+	}
+
+	public void setProductoService(ProductoService productoService) {
+		this.productoService = productoService;
+	}
+
+	public TiendaService getTiendaService() {
+		return tiendaService;
+	}
+
+	public void setTiendaService(TiendaService tiendaService) {
+		this.tiendaService = tiendaService;
+	}
+
 
 	
 }

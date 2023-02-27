@@ -27,7 +27,7 @@ public class ProductoServiceTest {
 	private CategoriaProductService catProdService;
 	
 	
-	@Test
+	//@Test
 	public void saveProduct() {
 		
 		TGenProducto producto1 = new TGenProducto();
@@ -47,6 +47,17 @@ public class ProductoServiceTest {
 
 		prodService.save(producto1);
 		
+	}
+	
+	@Test
+	public void countProd() {
+		Long idtienda = 101L;
+		
+		long total = prodService.countProductsByIdTienda(idtienda);
+		
+		System.out.println("\n");
+		System.out.println("\t Total registros " + total);
+		System.out.println("\n");
 	}
 	
 	

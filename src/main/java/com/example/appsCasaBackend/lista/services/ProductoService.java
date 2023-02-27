@@ -9,5 +9,7 @@ public interface ProductoService {
 	public boolean deleteProductoById(Long idProducto);
 	
 	public TGenProducto findById(Long idProducto);
+	
+	public long countProductsByIdTienda(Long idTienda);
 
 }
